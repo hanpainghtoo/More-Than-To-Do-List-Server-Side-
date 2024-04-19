@@ -7,6 +7,7 @@ require('dotenv').config();
 const cors = require('cors')
 
 var indexRouter = require('./routes/index');
+var userRouter = require('./routes/user.route');
 
 var app = express();
 app.use(cors());
@@ -21,13 +22,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', (req, res)=>{
-  res.json({
-    'More Than To DO List App': "Bone & Htoo 's Enterprise Application"
-  })
-})
+// app.use('/', (req, res)=>{
+//   res.json({
+//     'More Than To DO List App': "Bone & Htoo 's Enterprise Application"
+//   })
+// })
 
-// app.use('/', indexRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,7 +43,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  console.log("ERROR ", err)
+  // res.render('error');
 });
 
 let port = process.env.PORT ? process.env.PORT : 3000;

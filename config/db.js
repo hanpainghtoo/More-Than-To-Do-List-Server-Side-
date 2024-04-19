@@ -6,14 +6,16 @@ const pool = new Pool({
   password: process.env.PASSWORD,
   port: 5432,
 })
-async function queryDatabase(){
-  try{
-    const res = await pool.query('SELECT * FROM tbl_user')
-  } catch(error){
-    console.error('Error executing query:', error);
-  } finally {
-    await pool.end()
+// async function queryDatabase(){
+//   try{
+//     const res = await pool.query('SELECT * FROM tbl_user')
+//   } catch(error){
+//     console.error('Error executing query:', error);
+//   } finally {
+//     await pool.end()
 
-  }
-}
-queryDatabase();
+//   }
+// }
+// queryDatabase();
+
+module.exports = pool;
